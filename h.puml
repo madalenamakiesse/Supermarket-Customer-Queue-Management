@@ -1,0 +1,101 @@
+@startuml
+abstract class Modo #fdcfcf{
++Modo()
+#abrirFicheiro( nomeFich : String)
++{abstract} controller()
+#escreverFicheiro( nomeFich : String)
+#op1()
+#{abstract}op2()
+#op3()
+#op4()
+#{abstract}op5()
+#{abstract}op6()
+#{abstract}opcoes()
+#{abstract}programa()
+#{abstract}receberValoresFicheiro()
+#aleatorio : Random
+#caixas : ArrayList<Caixa>
+#dados : ArrayList<String>
+#idCliente : int
+#leitura : BufferedReader
+#ler : Scanner
+#nuCaixas : int
+#op : int
+#tempoAtProduto : int
+}
+
+class Caixa #f4e8df{
+    +Caixa( id : int)
+    +addCliente(cliente : Cliente)
+    +getClientes(): ArrayList<Cliente>
+    +getNuClienteFila(): int
+    +getTempoRestAtenClienteTopo() : int
+    +getTempoTotalAten() : int
+    +setClientes(clientes: ArrayList<Cliente>)
+    +setNuClienteFila(nuClienteFila : int)
+    +setTempoMedAten(tempoMedAten : double)
+    +setTempoRestAtenClienteTopo(tempoRestAtenClienteTopo : int)
+    +setTempoTotalAten(tempoTotalAten : int)
+    +setcAtendidos(cAtendidos : int)
+    +toString() : String
+-cAtendidos: int
+-clientes : ArrayList<Cliente>
+-id : int
+-nuClienteFila : int
+-tempoMedAten : int
+-tempoRestAtenClienteTopo : int
+-tempoTotalAten : int
+}
+
+class Cliente #f6f6e2{
++Cliente(id : int, numeroProdutos: int)
++getId(): int
++getNumeroProdutos(): int
++toString(): String
+-id: int
+-numeroProdutos: int
+}
+
+class Controller #c0cdc7{
++Controller()
++menu()
+-opcoes()
+-automaticoController : ModoAutomatico
+-manualController : ModoManual
+-op : int
+}
+
+class ExameMadalenaMakiesse20190346 #ffe599{
++ExameMadalenaMakiesse20190346()
++{static} main (args : String[])
+}
+
+class ModoAutomatico #fbd8ac{
++ModoAutomatico()
+-intervaloTempoMaximo : int
+}
+
+class ModoManual #fbd8ac{
++ModoManual()
+}
+
+
+Caixa "1..1" *-- "0..*" Cliente : tem
+
+Modo "1..1" *-- "0..*" Caixa : tem
+
+Controller "1..1" -- "1..1" ModoAutomatico : tem
+
+Controller "1..1" -- "1..1" ModoManual : tem
+
+ExameMadalenaMakiesse20190346 "1..1" -- "1..1" Controller : tem
+
+ModoAutomatico --|> Modo
+ModoManual --|> Modo
+
+note left of ExameMadalenaMakiesse20190346 #88d885
+    Considerou-se como o 
+    front-controller ou 
+    o view
+end note
+@enduml
